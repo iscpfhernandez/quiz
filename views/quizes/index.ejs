@@ -1,3 +1,12 @@
+<form method="get" action=" /quizes">
+   <label>Texto a buscar:</label>
+   <input type="text" name="search" placeholder="Texto a buscar" <% if(busqueda) {%> value="<%= busqueda %>" <%}%>>
+   <button type="submit">Buscar</button>
+</form>
+<!--
+<% if (typeof busqueda !== 'undefined' && busqueda !== null)%> 
+<% if(busqueda) {%> <p>El texto a buscar es <%= busqueda %></p> <%}%>
+-->
 <table>
 <% var i; for (i=0; i< quizes.length; i++) { %>
   <tr>
