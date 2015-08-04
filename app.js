@@ -38,6 +38,24 @@ app.use(function(req, res, next){
  next();
 });
 
+//auto logout
+app.use(function(req, res, next){
+ if (req.session.user)
+ {
+  if (!req.session.hora) { req.session.hora = new Date().toString(); }
+  var hora1 = new Date();
+  // dos minutos menos
+  var hora =  new Date(hora1.getTime() - (120 * 1000));
+  if (Date.parse(req.session.hora) < hora) {  //es menor, cierra la sesion
+    delete req.session.user;
+    delete req.session.hora;
+    //redirecciona a path anterior a login
+    res.redirect(req.session.redir.toString());
+  } 
+  res.locals.session = req.session;    
+ } 
+ next();
+});
 
 app.use('/', routes);
 

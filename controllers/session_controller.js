@@ -27,6 +27,7 @@ exports.create = function(req, res){
    //crear req.session.user y guardas campos id y username
    //la sesion se define por la existencia de: req.session.user
    req.session.user = {id:user.id, username: user.username};
+   req.session.hora = new Date().toString();
    var ruta = req.session.redir || "/";
    //redirecciona a path anterior a login
    res.redirect(ruta.toString());
@@ -36,6 +37,7 @@ exports.create = function(req, res){
 //DELETE /logout
 exports.destroy = function(req, res){
  delete req.session.user;
+ delete req.session.hora;
  //redirecciona a path anterior a login
  res.redirect(req.session.redir.toString());
 };
